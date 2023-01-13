@@ -1,17 +1,13 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {
-    FacebookLoginButton,
-    InstagramLoginButton
-} from "react-social-login-buttons";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 class SignInForm extends Component {
     constructor( props ) {
         super( props );
 
         this.state = {
-            email: "",
-            password: ""
+            userId  : "",
+            userPassword: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -29,10 +25,13 @@ class SignInForm extends Component {
     }
 
     handleSubmit(event) {
+        // submit 새로 고침 방지
         event.preventDefault();
 
         console.log("The form was submitted with the following data:");
         console.log(this.state);
+
+        // localStorage 에 저장 안녕하세요 할 예정
     }
 
     render() {
@@ -40,31 +39,31 @@ class SignInForm extends Component {
             <div className="formCenter">
                 <form className="formFields" onSubmit={this.handleSubmit}>
                     <div className="formField">
-                        <label className="formFieldLabel" htmlFor="email">
-                            E-Mail Address
+                        <label className="formFieldLabel" htmlFor="userId">
+                            ID
                         </label>
                         <input
-                            type="email"
-                            id="email"
+                            type="text"
+                            id="userId"
                             className="formFieldInput"
-                            placeholder="Enter your email"
-                            name="email"
-                            value={this.state.email}
+                            placeholder="Enter your ID"
+                            name="userId"
+                            value={this.state.userId}
                             onChange={this.handleChange}
                         />
                     </div>
 
                     <div className="formField">
-                        <label className="formFieldLabel" htmlFor="password">
+                        <label className="formFieldLabel" htmlFor="userPassword">
                             Password
                         </label>
                         <input
-                            type="password"
-                            id="password"
+                            type="userPassword"
+                            id="userPassword"
                             className="formFieldInput"
-                            placeholder="Enter your password"
-                            name="password"
-                            value={this.state.password}
+                            placeholder="Enter your userPassword"
+                            name="userPassword"
+                            value={this.state.userPassword}
                             onChange={this.handleChange}
                         />
                     </div>
@@ -74,16 +73,6 @@ class SignInForm extends Component {
                         <Link to="/" className="formFieldLink">
                             Create an account
                         </Link>
-                    </div>
-
-                    <div className="socialMediaButtons">
-                        <div className="facebookButton">
-                            <FacebookLoginButton onClick={() => alert("Hello")} />
-                        </div>
-
-                        <div className="instagramButton">
-                            <InstagramLoginButton onClick={() => alert("Hello")} />
-                        </div>
                     </div>
                 </form>
             </div>
