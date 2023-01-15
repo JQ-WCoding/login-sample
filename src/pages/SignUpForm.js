@@ -1,46 +1,24 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const SignUpForm = () => {
-    // constructor( props ) {
-    //     super( props );
-    //
-    //     this.state = {
-    //         userId: "",
-    //         userPassword: "",
-    //         name: "",
-    //         hasAgreed: false
-    //     };
-    //
-    //     this.handleChange = this.handleChange.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
-    //
-    // handleChange(event) {
-    //     let target = event.target;
-    //     let value = target.type === "checkbox" ? target.checked : target.value;
-    //     let name = target.name;
-    //
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-    //
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //
-    //     console.log("The form was submitted with the following data:");
-    //     console.log(this.state);
-    // }
 
-    const [userId, setUserId] = useState( '' );
-    const [userPassword, setUserPassword] = useState( '' );
-    const [userName, setUserName] = useState( '' );
+    const [loginInfo, setLoginIngfo] = useState( {
+        userName    : '',
+        userId      : '',
+        userPassword: ''
+    } );
 
 
-    const handleSubmit = (args) => {
+    const handleSubmit = ( args ) => {
         debugger;
         // 회원가입 이동 url 이용하여 신청예정
+        axios.post( 'http://localhost:8080/api/users/add', loginInfo ).then(
+
+        ).catch(
+
+        );
     }
 
     /**
@@ -49,22 +27,12 @@ const SignUpForm = () => {
      * @description target 객체를 이용해 name은 input 태그의 name, value는 input 태그의 value를 매개변수(파라미터)로 이용
      */
     const handleChange = ( {target} ) => {
-        const value = target.value;
-
-        switch ( target.name ) {
-            case 'name':
-                setUserName( value );
-                break;
-            case 'userId':
-                setUserId( value );
-                break;
-            case 'userPassword':
-                setUserPassword( value );
-                break;
-            default:
-                console.log( 'error' );
-                break;
+        const info = {
+            ...loginInfo,
+            [target.name]: target.value
         }
+
+        setLoginIngfo( info );
     }
 
     return (
@@ -76,11 +44,11 @@ const SignUpForm = () => {
                     </label>
                     <input
                         type="text"
-                        id="name"
+                        id="userName"
                         className="formFieldInput"
                         placeholder="Enter your full name"
-                        name="name"
-                        value={userName}
+                        name="userName"
+                        value={loginInfo.userName}
                         onChange={handleChange}
                     />
                 </div>
@@ -94,7 +62,7 @@ const SignUpForm = () => {
                         className="formFieldInput"
                         placeholder="Enter your userId"
                         name="userId"
-                        value={userId}
+                        value={loginInfo.userId}
                         onChange={handleChange}
                     />
                 </div>
@@ -108,7 +76,7 @@ const SignUpForm = () => {
                         className="formFieldInput"
                         placeholder="Enter your password"
                         name="userPassword"
-                        value={userPassword}
+                        value={loginInfo.userPassword}
                         onChange={handleChange}
                     />
                 </div>
@@ -123,6 +91,5 @@ const SignUpForm = () => {
             </form>
         </div>
     );
-
 }
 export default SignUpForm;
