@@ -13,7 +13,7 @@ const SignUpForm = () => {
 
     const handleSubmit = () => {
         // 회원가입 이동 url 이용하여 신청예정
-        axios.post( 'http://localhost:8080/api/users/add', loginInfo ).then( ( res ) => {
+        axios.post( '/users/add', loginInfo ).then( ( res ) => {
             console.log( res );
         } ).catch( ( res ) => {
             console.log( res );

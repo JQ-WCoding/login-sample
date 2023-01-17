@@ -1,37 +1,38 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 class SignInForm extends Component {
     constructor( props ) {
         super( props );
 
         this.state = {
-            userId  : "",
+            userId      : "",
             userPassword: ""
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind( this );
+        this.handleSubmit = this.handleSubmit.bind( this );
     }
 
-    handleChange(event) {
+    handleChange( event ) {
         let target = event.target;
         let value = target.type === "checkbox" ? target.checked : target.value;
         let name = target.name;
 
-        this.setState({
+        this.setState( {
             [name]: value
-        });
+        } );
     }
 
-    handleSubmit(event) {
+    handleSubmit( event ) {
         // submit 새로 고침 방지
         event.preventDefault();
 
-        console.log("The form was submitted with the following data:");
-        console.log(this.state);
+        axios.post( '/users/login', this.state ).then( ( res ) => {
+            console.log( res );
+        } ).catch();
 
-        // localStorage 에 저장 안녕하세요 할 예정
     }
 
     render() {
@@ -69,7 +70,8 @@ class SignInForm extends Component {
                     </div>
 
                     <div className="formField">
-                        <button className="formFieldButton">Sign In</button>{" "}
+                        <button className="formFieldButton" onClick={this.handleSubmit}>Sign In</button>
+                        {" "}
                         <Link to="/" className="formFieldLink">
                             Create an account
                         </Link>
