@@ -25,13 +25,20 @@ class SignInForm extends Component {
         } );
     }
 
-    handleSubmit( event ) {
+     handleSubmit( event ) {
         // submit 새로 고침 방지
         event.preventDefault();
 
-        axios.post( '/users/login', this.state ).then( ( res ) => {
-            console.log( res );
-        } ).catch();
+         axios.post( '/api/user/login', {}, {
+             params: {
+                 userId      : this.state.userId,
+                 userPassword: this.state.userPassword
+             }
+         } ).then( ( {data} ) => {
+             alert( `로그인 성공 환영합니다. ${data[0].userName} 님` );
+         } ).catch( () => {
+             alert( '로그인 실패' );
+         } );
 
     }
 
@@ -59,7 +66,7 @@ class SignInForm extends Component {
                             Password
                         </label>
                         <input
-                            type="userPassword"
+                            type="password"
                             id="userPassword"
                             className="formFieldInput"
                             placeholder="Enter your userPassword"

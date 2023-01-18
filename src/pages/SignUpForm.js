@@ -11,12 +11,22 @@ const SignUpForm = () => {
     } );
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        // submit 새로 고침 방지
+        event.preventDefault();
         // 회원가입 이동 url 이용하여 신청예정
-        axios.post( '/users/add', loginInfo ).then( ( res ) => {
-            console.log( res );
-        } ).catch( ( res ) => {
-            console.log( res );
+        axios.post( '/api/user/signUp', {}, {
+            params: {
+                userName    : loginInfo.userName,
+                userId      : loginInfo.userId,
+                userPassword: loginInfo.userPassword
+            }
+        } ).then( ( {data} ) => {
+            // url 만 제거 및 이동
+            window.location.href = '/';
+            alert( `회원가입 되었습니다. ${data} 님` );
+        } ).catch( ( err ) => {
+            console.log( err );
         } );
     }
 
@@ -81,7 +91,7 @@ const SignUpForm = () => {
                 </div>
 
                 <div className="formField">
-                    <button className="formFieldButton">Sign Up</button>
+                    <button className="formFieldButton" onClick={handleSubmit}>Sign Up</button>
                     {" "}
                     <Link to="/sign-in" className="formFieldLink">
                         I'm already member
