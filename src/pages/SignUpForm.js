@@ -11,6 +11,11 @@ const SignUpForm = () => {
     } );
 
 
+    /**
+     * handleSubmit
+     * @param event
+     * @description 로그인 신청
+     */
     const handleSubmit = (event) => {
         // submit 새로 고침 방지
         event.preventDefault();

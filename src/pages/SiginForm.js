@@ -15,6 +15,11 @@ class SignInForm extends Component {
         this.handleSubmit = this.handleSubmit.bind( this );
     }
 
+    /**
+     * handleChange
+     * @param event
+     * @description input 내부 값 변경 핸들러
+     */
     handleChange( event ) {
         let target = event.target;
         let value = target.type === "checkbox" ? target.checked : target.value;
@@ -25,6 +30,11 @@ class SignInForm extends Component {
         } );
     }
 
+    /**
+     * handleSubmit
+     * @param event
+     * @description 로그인 요청
+     */
      handleSubmit( event ) {
         // submit 새로 고침 방지
         event.preventDefault();
@@ -35,7 +45,8 @@ class SignInForm extends Component {
                  userPassword: this.state.userPassword
              }
          } ).then( ( {data} ) => {
-             alert( `로그인 성공 환영합니다. ${data[0].userName} 님` );
+             alert( `로그인 성공 환영합니다. ${data[0]?.userName} 님` );
+             window.location.href = '/';
          } ).catch( () => {
              alert( '로그인 실패' );
          } );
