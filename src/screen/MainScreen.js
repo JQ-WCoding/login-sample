@@ -2,7 +2,7 @@ import React from "react";
 import {HashRouter, NavLink, Route, Routes} from "react-router-dom";
 import SignInForm from "../pages/SiginForm";
 import SignUpForm from "../pages/SignUpForm";
-import Board from "../pages/Board";
+import Board from "../pages/BoardList";
 
 
 const MainScreen = () => {
