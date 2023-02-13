@@ -1,13 +1,16 @@
-import { Component } from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 /**
- * BoardList class
+ * 인터넷에서 주워온 디자인 코드(화면 그리는건 제 능력이 아니라서 죄송합니다 :( )
  */
-class BoardList extends Component {
-    render() {
-        return (
+
+const BoardList = ( props ) => {
+    console.log( 'inBoard' );
+
+    return (
+        <>
             <div>
                 <Table striped bordered hover>
                     <thead>
@@ -53,8 +56,12 @@ class BoardList extends Component {
                 <Button variant="secondary">수정하기</Button>
                 <Button variant="danger">삭제하기</Button>
             </div>
-        );
-    }
+        </>
+    );
+}
+
+BoardList.deafaultProps = {
+    title: '게시판'
 }
 
 export default BoardList;

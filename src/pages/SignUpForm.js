@@ -4,7 +4,7 @@ import axios from "axios";
 
 const SignUpForm = () => {
 
-    const [loginInfo, setLoginIngfo] = useState( {
+    const [loginInfo, setLoginInfo] = useState( {
         userName    : '',
         userId      : '',
         userPassword: ''
@@ -46,7 +46,7 @@ const SignUpForm = () => {
             [target.name]: target.value
         }
 
-        setLoginIngfo( info );
+        setLoginInfo( info );
     }
 
     return (
