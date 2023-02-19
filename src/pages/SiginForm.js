@@ -3,16 +3,16 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 class SignInForm extends Component {
-    constructor( props ) {
-        super( props );
+    constructor(props) {
+        super(props);
 
         this.state = {
-            userId      : "",
+            userId: "",
             userPassword: ""
         };
 
-        this.handleChange = this.handleChange.bind( this );
-        this.handleSubmit = this.handleSubmit.bind( this );
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /**
@@ -20,14 +20,14 @@ class SignInForm extends Component {
      * @param event
      * @description input 내부 값 변경 핸들러
      */
-    handleChange( event ) {
+    handleChange(event) {
         let target = event.target;
         let value = target.type === "checkbox" ? target.checked : target.value;
         let name = target.name;
 
-        this.setState( {
+        this.setState({
             [name]: value
-        } );
+        });
     }
 
     /**
@@ -35,21 +35,22 @@ class SignInForm extends Component {
      * @param event
      * @description 로그인 요청
      */
-     handleSubmit( event ) {
+    handleSubmit(event) {
         // submit 새로 고침 방지
         event.preventDefault();
 
-         axios.post( '/api/user/login', {}, {
-             params: {
-                 userId      : this.state.userId,
-                 userPassword: this.state.userPassword
-             }
-         } ).then( ( {data} ) => {
-             alert( `로그인 성공 환영합니다. ${data[0]?.userName} 님` );
-             window.location.href = '/';
-         } ).catch( () => {
-             alert( '로그인 실패' );
-         } );
+        axios.post('/api/user/login', {}, {
+            params: {
+                userId: this.state.userId,
+                userPassword: this.state.userPassword
+            }
+        }).then(({data}) => {
+            localStorage.setItem('userId', data[0]?.userId);
+            window.location.href = '/board';
+            alert(`환영합니다. ${data[0]?.userName} 님`);
+        }).catch(() => {
+            alert('로그인 실패');
+        });
 
     }
 
