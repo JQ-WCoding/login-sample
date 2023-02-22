@@ -18,7 +18,6 @@ const MainScreen = () => {
         const url = window.location.href;
         const splitUrl = url.split('/');
         const location = splitUrl[splitUrl.length - 1];
-        console.log(location);
 
         if (location === 'board' || location === 'board-write') {
             if (userId === null) {

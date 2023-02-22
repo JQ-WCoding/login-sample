@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 class SignInForm extends Component {
+
     constructor(props) {
         super(props);
 
@@ -51,7 +52,6 @@ class SignInForm extends Component {
         }).catch(() => {
             alert('로그인 실패');
         });
-
     }
 
     render() {
