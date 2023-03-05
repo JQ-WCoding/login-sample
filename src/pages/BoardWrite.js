@@ -5,39 +5,36 @@ import axios from "axios";
 
 const BoardWrite = () => {
 
-    const [title, setTitle] = useState("");
-    const [context, setContext] = useState("");
+    const [title, setTitle] = useState( "" );
+    const [content, setContent] = useState( "" );
 
     const handleCancel = () => {
         window.location.href = '/board';
     }
 
-    const handleSubmit = (event) => {
-
-        debugger;
-
+    const handleSubmit = ( event ) => {
         event.preventDefault();
 
-        axios.post('/api/board/save', {}, {
+        axios.post( '/api/board/save', {}, {
             params: {
-                title: title,
-                context: context,
-                userId: localStorage.getItem('userId')
+                title  : title,
+                content: content,
+                userId : localStorage.getItem( 'userId' )
             }
-        }).then(({data}) => {
-            console.log(data);
-            alert('저장 완료');
-        }).catch(() => {
-            alert('저장 실패');
-        });
+        } ).then( ( {data} ) => {
+            window.location.href = '/board'
+            alert( `${data} 저장 완료` );
+        } ).catch( () => {
+            alert( '저장 실패' );
+        } );
     }
 
-    const handleChangeTitle = ({target: {value}}) => {
-        setTitle(value);
+    const handleChangeTitle = ( {target: {value}} ) => {
+        setTitle( value );
     }
 
-    const handleChangeText = ({target: {value}}) => {
-        setContext(value);
+    const handleChangeText = ( {target: {value}} ) => {
+        setContent( value );
     }
 
     return (

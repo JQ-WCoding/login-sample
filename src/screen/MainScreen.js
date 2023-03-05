@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BrowserRouter, HashRouter, NavLink, Route, Routes} from "react-router-dom";
+import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import SignInForm from "../pages/SiginForm";
 import SignUpForm from "../pages/SignUpForm";
 import BoardList from "../pages/BoardList";

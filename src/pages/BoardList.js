@@ -9,22 +9,30 @@ import {v4 as uuidV4} from 'uuid';
  */
 
 const BoardList = () => {
-    const [contentInfo, setContentInfo] = useState([]);
+    const [contentInfo, setContentInfo] = useState( [] );
 
     const handlePostInfo = async () => {
-        axios.post('/api/board/getAll').then(({data}) => {
-            setContentInfo(data.reverse());
-        }).catch((err) => {
-            console.log(err);
-        });
+        axios.get( '/api/board/getAll' ).then( ( {data} ) => {
+            setContentInfo( data.reverse() );
+        } ).catch( ( err ) => {
+            console.log( err );
+        } );
     }
 
-    useEffect(() => {
+    useEffect( () => {
         handlePostInfo().then();
-    }, []);
+    }, [] );
 
     const handleButtonWrite = () => {
         window.location.href = '/board-write';
+    }
+    const handleOnClick = ( {currentTarget} ) => {
+
+        axios.get( `/api/board/${currentTarget.id}` )
+            .then( ( {data} ) => {
+                console.log( data[0] );
+            } )
+            .catch();
     }
 
     return (
@@ -40,8 +48,8 @@ const BoardList = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {contentInfo.map((data) =>
-                        <tr key={uuidV4()}>
+                    {contentInfo.map( ( data ) =>
+                        <tr style={{cursor: 'pointer'}} key={uuidV4()} onClick={handleOnClick} id={data[0]}>
                             <td>{data[0]}</td>
                             <td>{data[1]}</td>
                             <td>{data[3]}</td>
