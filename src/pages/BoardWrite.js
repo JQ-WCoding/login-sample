@@ -5,10 +5,19 @@ import {Form} from "react-bootstrap";
 const BoardWrite = () => {
     const [board, setBoard] = useState( {} );
 
+    /**
+     * @name handleCancel
+     * @description 취소 버튼, 이전 게시글 목록 화면으로 이동
+     */
     const handleCancel = () => {
         window.location.href = '/board';
     }
 
+    /**
+     * @name handleSave
+     * @param event
+     * @description 저장 버튼 클릭 시
+     */
     const handleSave = ( event ) => {
         event.preventDefault();
 
@@ -25,6 +34,12 @@ const BoardWrite = () => {
             alert( '저장 실패' );
         } );
     }
+
+    /**
+     * @name handleChange
+     * @param target
+     * @description 제목, 본문 편집 시
+     */
     const handleChange = ( {target} ) => {
         setBoard( {
             ...board,
@@ -42,7 +57,12 @@ const BoardWrite = () => {
 
                 <div>
                     <div>내용</div>
-                    <textarea name="content" style={{width: "50%", height: "200px"}} value={board.content} onChange={handleChange}/>
+                    <textarea name="content" style={{width: "50%", height: "200px"}} value={board.content}
+                              onChange={handleChange}/>
+                </div>
+                <div>
+                    <div>첨부 이미지</div>
+                    <input name="image" type="file" accept="image/*"/>
                 </div>
             </Form>
             <button variant="info" onClick={handleSave}>작성완료</button>

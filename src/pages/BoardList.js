@@ -32,6 +32,12 @@ const BoardList = () => {
     const handleButtonWrite = () => {
         window.location.href = '/board-write';
     }
+
+    /**
+     * @name handleOnClick
+     * @param currentTarget
+     * @description 게시판 목록 선택시 게시글 보이기
+     */
     const handleOnClick = ( {currentTarget} ) => {
         axios.get( `/api/board/${currentTarget.id}` )
             .then( ( {data} ) => {
@@ -42,6 +48,11 @@ const BoardList = () => {
             } );
     }
 
+    /**
+     * @name handleSave
+     * @param event
+     * @description 저장버튼 클릭
+     */
     const handleSave = ( event ) => {
         event.preventDefault();
 
@@ -71,6 +82,10 @@ const BoardList = () => {
         if ( data[0].insPersonId === localStorage.getItem( 'userId' ) ) setShowEditButton( true );
     }
 
+    /**
+     * @name handleEdit
+     * @description 수정 버튼 클릭
+     */
     const handleEdit = () => {
         setDisabledEdit( false );
         setShowEditButton( false );
@@ -86,6 +101,11 @@ const BoardList = () => {
         setContenLoad( false );
     }
 
+    /**
+     * @name handleChange
+     * @param target
+     * @description 제목, 본문 편집시
+     */
     const handleChange = ( {target} ) => {
         setBoard( {
             ...board,
